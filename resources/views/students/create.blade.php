@@ -44,7 +44,7 @@ required="required" name="phone_number"></br>
     <button type="submit" name="add" class="btn btn-primary 
 float-right">Add Data</button>
 </form>
-                </div>
+</div>
             </div>
         </div>
     </div>
