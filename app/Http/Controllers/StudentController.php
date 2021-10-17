@@ -85,7 +85,7 @@ class StudentController extends Controller
         $student->save();
         return redirect()->route('students.index');
     }
-    
+
     /**
      * Remove the specified resource from storage.
      *
@@ -97,5 +97,6 @@ class StudentController extends Controller
         $student = Student::find($id);
         $student->delete();
         return redirect()->route('students.index');
+
     }
 }
