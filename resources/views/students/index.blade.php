@@ -14,13 +14,15 @@
                         </div>
                     @endif
 
-                    <a href="/students/create" class="btn btn-primary">Add Data</a> <br><br>
+                    <a href="/students/create" class="btn btn-primary">Add Data</a> 
+                    <br><br> 
+
                     <table class="table table-responsive table-striped">
                         <thead>
                             <tr>
                                 <th>NIM</th>
                                 <th>Name</th>
-                                <th>Class</th>
+                                <th>class</th>
                                 <th>Department</th>
                                 <th>Action</th>
                             </tr>
@@ -33,17 +35,17 @@
                                 <td>{{ $s->class }}</td>
                                 <td>{{ $s->department }}</td>
                                 <td>
-                                <form action="/students/{{$s->id}}" method="post">
+                                <form action="/students/{{$s->id}}" method="post"> 
                                     <a href="/students/{{$s->id}}/edit" class="btn btn-warning">Edit</a>
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" name="delete" class="btn btn-danger">Delete</button>
-                                </form>
+                                    <button type="submit" name="delete" class="btn btn-danger">Delete</button type=>
+                                </form>     
                                 </td>
                             </tr>
-                            @endforeach
+                            @endforeach 
                         </tbody>
-                    </table>
+                    </table>                  
                 </div>
             </div>
         </div>
