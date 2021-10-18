@@ -52,14 +52,13 @@
                                 </li>
                             @endif
                         @else
-                            <!-- Halaman home dan Students-->
                             <li class="nav-item">
-                                <a class="nav-link" href="/home">Home</a>
+                                    <a class="nav-link" href="{{ route('home') }}">{{ __('HOME') }}</a>
                             </li>
+
                             <li class="nav-item">
-                                <a class="nav-link" href="/students">CRUD</a>
+                                    <a class="nav-link" href="http://127.0.0.1:8000/students">{{ __('CRUD') }}</a>
                             </li>
-                            
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -67,8 +66,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
