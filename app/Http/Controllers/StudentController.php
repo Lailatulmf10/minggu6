@@ -29,6 +29,7 @@ class StudentController extends Controller
         return view('students.create',['kelas'=>$kelas]);
     }
 
+    
     /**
      * Store a newly created resource in storage.
      *
