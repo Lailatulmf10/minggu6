@@ -14,6 +14,7 @@
                     </div>
                     @endif
 
+                    
                     <form action="/students/{{$student->id}}" method="get">
                     @csrf
                         <table class="table table-responsive">

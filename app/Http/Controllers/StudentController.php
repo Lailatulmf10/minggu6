@@ -29,7 +29,7 @@ class StudentController extends Controller
         return view('students.create',['kelas'=>$kelas]);
     }
 
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -64,6 +64,7 @@ class StudentController extends Controller
         $student = Student::find($id);
         return view('students.view',['student'=>$student]);
     }
+    
     /**
      * Show the form for editing the specified resource.
      *
