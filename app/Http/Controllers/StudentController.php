@@ -64,7 +64,7 @@ class StudentController extends Controller
         $student = Student::find($id);
         return view('students.view',['student'=>$student]);
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -78,6 +78,7 @@ class StudentController extends Controller
         return view('students.edit',['student'=>$student, 
         'kelas'=>$kelas]);
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -101,6 +102,7 @@ class StudentController extends Controller
         
         return redirect()->route('students.index');
     }
+    
     /**
      * Remove the specified resource from storage.
      *
