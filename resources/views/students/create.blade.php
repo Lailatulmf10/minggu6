@@ -25,12 +25,16 @@ required="required" name="nim"></br>
         <label for="name">Name</label>
         <input type="text" class="form-control" 
 required="required" name="name"></br>
-    </div>
     <div class="form-group">
-        <label for="class">Class</label>
-        <input type="text" class="form-control" 
-required="required" name="class"></br>
-    </div>
+        <label for="Kelas">Class</label>
+        <select class="form-control" name="Kelas">
+            @foreach($kelas as $class)
+                <option value="{{$class->id}}"> 
+                    {{ $class->class_name }} 
+                </option>
+            @endforeach
+        </select></br>
+</div>
     <div class="form-group">
         <label for="department">Department</label>
         <input type="text" class="form-control" 
@@ -44,7 +48,7 @@ required="required" name="phone_number"></br>
     <button type="submit" name="add" class="btn btn-primary 
 float-right">Add Data</button>
 </form>
-</div>
+                </div>
             </div>
         </div>
     </div>

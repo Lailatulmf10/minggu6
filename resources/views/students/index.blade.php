@@ -38,7 +38,7 @@
                             <tr>
                                 <td>{{ $s->nim }}</td>
                                 <td>{{ $s->name }}</td>
-                                <td>{{ $s->class }}</td>
+                                <td>{{ $s->kelas->class_name }}</td>
                                 <td>{{ $s->department }}</td>
                                 <td>
                                 <form action="/students/{{$s->id}}" method="post">
@@ -47,6 +47,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" name="delete" class="btn btn-danger">Delete</button>
+                                    <a href="/students/{{$s->id}}/nilai" class="btn btn-info">Nilai</a>
                                 </form>
                                 </td>
                             </tr>
