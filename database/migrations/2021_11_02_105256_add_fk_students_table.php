@@ -32,3 +32,4 @@ class AddFkStudentsTable extends Migration
         });
     }
 }
+

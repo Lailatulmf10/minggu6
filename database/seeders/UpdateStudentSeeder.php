@@ -17,3 +17,4 @@ class UpdateStudentSeeder extends Seeder
         DB::table('students')->update(['class_id' => 1]);
     }
 }
+
