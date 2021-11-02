@@ -15,3 +15,4 @@ class Kelas extends Model
         return $this->hasMany(Student::class);
     }
 }
+
