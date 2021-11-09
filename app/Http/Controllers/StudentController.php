@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Kelas;
+use App\Models\Course;
 
 class StudentController extends Controller
 {
@@ -101,13 +102,21 @@ class StudentController extends Controller
         $student->name = $request->name;
         $student->department = $request->department;
         $student->phone_number = $request->phone_number;
-        
+     
+        if($student->photo && file_exists(storage_path('app/public/'.$student->photo)))
+            {
+                \Storage::delete('public/'.$student->photo);
+            }
+            $image_name = $request->file('photo')->store('images',
+            'public');
+            $student->photo = $image_name;
+    
         $kelas = new Kelas;
         $kelas->id = $request->Kelas;
-        
+
         $student->kelas()->associate($kelas);
         $student->save();
-        
+      
         return redirect()->route('students.index');
     }
     
