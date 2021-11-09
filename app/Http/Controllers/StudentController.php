@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Kelas;
 use App\Models\Course;
+use PDF;
 
 class StudentController extends Controller
 {
@@ -14,11 +15,23 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $student = Student::with('kelas')->get();
         return view('students.index', ['student'=>$student]);
+
+        /*
+        $keyword = $request->get('keyword');
+        $students = Student::all();
+
+        if($keyword){
+            $students = Student::where("name","LIKE","%$keyword%")->get();
+        }
+
+        return view('students.index',['student'=>$students]);
+        */
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -30,7 +43,6 @@ class StudentController extends Controller
         return view('students.create',['kelas'=>$kelas]);
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
@@ -40,9 +52,9 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $student = new Student;
-
+            
         if($request->file('photo')){
-            $image_name = $request->file('photo')->store('images','public'); 
+        $image_name = $request->file('photo')->store('images','public');
         }
 
         $student->nim = $request->nim;
@@ -53,13 +65,16 @@ class StudentController extends Controller
 
         $kelas = new Kelas;
         $kelas->id = $request->Kelas;
-
+     
         $student->kelas()->associate($kelas);
         $student->save();
-        
-        // if true, redirect to index
+     
+        //add data
+        //Student::create($request->all());
+
+        //if true , redirect to index
         return redirect()->route('students.index')
-        ->with('success', 'Add data success!');
+            -> with('success','Add data success!');
     }
 
     /**
@@ -71,7 +86,7 @@ class StudentController extends Controller
     public function show($id)
     {
         $student = Student::find($id);
-        return view('students.view',['student'=>$student]);
+        return view('students.show',['student'=>$student]);
     }
 
     /**
@@ -84,8 +99,7 @@ class StudentController extends Controller
     {
         $student = Student::find($id);
         $kelas = Kelas::all();
-        return view('students.edit',['student'=>$student, 
-        'kelas'=>$kelas]);
+        return view('students.edit',['student'=>$student,'kelas'=>$kelas]);
     }
 
     /**
@@ -107,8 +121,7 @@ class StudentController extends Controller
             {
                 \Storage::delete('public/'.$student->photo);
             }
-            $image_name = $request->file('photo')->store('images',
-            'public');
+            $image_name = $request->file('photo')->store('images','public');
             $student->photo = $image_name;
     
         $kelas = new Kelas;
@@ -119,7 +132,7 @@ class StudentController extends Controller
       
         return redirect()->route('students.index');
     }
-    
+
     /**
      * Remove the specified resource from storage.
      *
@@ -130,17 +143,18 @@ class StudentController extends Controller
     {
         $student = Student::find($id);
         $student->delete();
-        return redirect()->route('students.index');
+        return redirect()->route('students.index');    
     }
-    public function search(Request $request)
-    {
-        $keyword = $request->search;
-        $student = student::where('name', 'like', "%" . $keyword . "%")->paginate(5);
-        return view('students.index', compact('student'))->with('i', (request()->input('page', 1) - 1) * 5);
-    }
+    
     public function nilai($id)
     {
         $student = Student::find($id);
         return view('students.nilai', ['student'=>$student]);
     }
+
+    public function report($id){
+        $student = Student::find($id);
+        $pdf = PDF::loadview('students.report',['student'=>$student]);
+        return $pdf->stream();
+    } 
 }
