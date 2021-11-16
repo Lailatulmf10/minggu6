@@ -46,22 +46,37 @@
                                 </li>
                             @endif
 
+                            <li class="nav-item">
+                                <a class="nav-link" href="/users">User</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/students">Students</a>
+                            </li>
+
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
+                            <!-- Halaman home , user, Students-->
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('home') }}">{{ __('HOME') }}</a>
+                                <a class="nav-link" href="/home">Home</a>
                             </li>
 
+                            <!--<li class="nav-item">
+                                <a class="nav-link" href="/users">User</a>
+                            </li>-->
                             <li class="nav-item">
-                                    <a class="nav-link" href="http://127.0.0.1:8000/students">{{ __('CRUD') }}</a>
+                                <a class="nav-link" href="/students">Students</a>
                             </li>
+
+                            <!--Untuk menyembunyikan menu data user-->
                             <li class="nav-item">
-                                    <a class="nav-link" href="http://127.0.0.1:8000/users">{{ __('USER DATA') }}</a>
-                            </li>
+                            @can('manage-users')
+                            <a class="nav-link" href="/users">User Data</a> 
+                            @endcan</li> 
+                                     
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -69,8 +84,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
